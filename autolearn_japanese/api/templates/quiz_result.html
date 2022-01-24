@@ -1,0 +1,109 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/home_student_style.css'%}">
+    <title>Autolearn Japanese</title>
+    <link rel="icon" href={% static 'images/icon.png'%} type="image/icon type">
+    <script src="{% static 'scripts/home_scripts.js'%}"></script>
+</head>
+<body>
+    <section>
+        <div class="header">
+            <div><a href="http://127.0.0.1:8000/student/home"><img class="icon" src={% static 'images/icon.png' %} alt="Autolearn icon"/></a></div>
+            <div class="dropdown">
+                <button class="dropbtn">Letters</button>
+                <div class="dropdown-content">
+                    <a href="http://127.0.0.1:8000/student/letters/Hiragana">Hiragana</a>
+                    <a href="http://127.0.0.1:8000/student/letters/Katakana">Katakana</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">Quizzes</button>
+                <div class="dropdown-content">
+                    <a href="http://127.0.0.1:8000/student/quiz/Beginner">Beginner</a>
+                    <a href="http://127.0.0.1:8000/student/quiz/Intermediate">Intermediate</a>
+                    <a href="http://127.0.0.1:8000/student/quiz/Advanced">Advanced</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn" onclick="reference()">References</button>
+            </div>
+            <div><button class="logout" onclick = "signout()">Log out</button></div>
+        </div>
+        <div class="dashboard">
+            {% block content %}
+            
+            <div class="container">
+                
+                <div class="card-columns" style="padding: 10px; margin: 20px;">
+                    <div class="card" align="centre">
+                        {% if score < total%}
+                            <img class="card-img-top" src="http://igis.edu.vn/wp-content/uploads/2017/12/phan-biet-miss-lose-fail.png" alt="Card image cap">
+                        {% else %}
+                            <img class="card-img-top" src="https://hoclaixecaptoc.com/wp-content/uploads/2018/11/a-1-1024x684.png" alt="Card image cap">
+                        {% endif %}
+                        <div class="card-body">
+                            <p class="card-text">Score: {{score}} out of {{total}} points</p>
+                            
+                            <p class="card-text">Percentage: {{percent}}%</p>
+                            <p class="card-text">Time Taken: {{time}} seconds</p>
+                        </div>
+                        <form method='post' id="review" action='' style="margin-left:8rem; margin-right:8rem; font-size:25px; display:none;">
+                            {% csrf_token %}
+                            {% for q  in questionAttempts%}
+                            <div class="form-group">
+                                <label for="question">Question #{{forloop.counter}}: {{q.question}}</label>
+                            </div>
+                            <div class="form-check" style="margin-top:5px;">
+                                {% if q.status %}
+                                <div class="form-check" style="background-color:rgb(51, 141, 51);">
+                                    <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios1" value="A" checked>
+                                    <label class="form-check-label" for="gridRadios1">
+                                        {{q.answer}}
+                                    </label>
+                                </div>
+                                {% else %}
+                                <div class="form-check" style="background-color:rgb(201, 117, 117);">
+                                    <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios1" value="A" checked>
+                                    <label class="form-check-label" for="gridRadios1">
+                                        {{q.answer}}
+                                    </label>
+                                </div>
+                                {% endif %}
+                                <br>
+                            </div>    
+                            {% endfor %}
+                        </form>
+                        <div class="end-review" style="margin-left:8rem; margin-right:8rem;">
+                            <button id="review-btn" class="quiz-btn" onclick="review()">Review Attempt</button>
+                            <br>
+                            <br>
+                            <button class="quiz-btn" onclick="quiz({{quizId}})">Retake Quiz</button>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+            {% endblock %}
+        </div>
+    </section>
+    <script>
+        function review() {
+            var btn = document.getElementById("review-btn");
+            var x = document.getElementById("review");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+                btn.textContent = "Hide"
+            } else {
+                x.style.display = "none";
+                btn.textContent = "Review Attempt"
+            }
+        }
+    </script>
+</body>
+</html>

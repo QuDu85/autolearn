@@ -1,0 +1,401 @@
+body{
+    margin:0;
+    overflow: hidden;
+    font:600 16px/18px URW Chancery L, cursive;
+    background-color: rgb(202, 167, 179);
+    height: 100%;
+}
+
+section {
+    position: relative;
+    width: 100%;
+    height: 80%;
+    display: flex;
+    min-height: 100vh;
+    padding-top: 20px;
+    border-top: 10px;
+    padding: 10px 20px 20px 10px;
+}
+
+.header {
+    position: absolute;
+    top: 0;
+    left:0;
+    /* margin: 0;
+    padding: 0; */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    background-color: rgb(206, 109, 109);
+}
+
+.icon {
+    height: 80px;
+    width: 80px;
+}
+
+/* Dropdown Button */
+.dropbtn {
+    background-color: rgb(206, 109, 109);
+    color: black;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    font-family: URW Chancery L, cursive;
+    font-weight: bold;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgb(206, 109, 109);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: brown;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: brown;}
+
+.logout{
+    position :absolute;
+    right:0;
+    top: 15px;
+    width: 120px;
+    height: 40px;
+    background-color: brown;
+    border: none;
+    border-radius: 20px;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    font-family: URW Chancery L, cursive;
+    font-weight: bold;
+    font-size: 16px;
+    float: right;
+    margin-top: 5px;
+    margin-right: 30px;
+}
+
+.dashboard {
+    /* top:500px;
+    bottom: 0; */
+    /* display: flex; */
+    /* align-items: center;
+    justify-content: center; */
+    /* width:100%; */
+    height: 550px;
+    width:100%;
+    padding: 30px 30px;
+    margin: 100px 50px 0px 65px;
+    overflow: auto;
+}
+
+.chart {
+    height:690px;
+    width:auto;
+}
+
+.edit {
+    margin-top:2rem;
+    width:20rem;
+    background-color: black;
+    color:white;
+    height: 3rem;
+}
+
+/* for pie chart */
+@property --p{
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 1;
+}
+
+.pie {
+    --p:20;
+    --b:22px;
+    --c:darkred;
+    --w:150px;
+    
+    width: var(--w);
+    aspect-ratio: 1;
+    position: relative;
+    display: inline-grid;
+    margin: 5px;
+    place-content: center;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+.pie:before,
+.pie:after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+}
+.pie:before {
+    inset: 0;
+    background:
+    radial-gradient(farthest-side,var(--c) 98%,#0000) top/var(--b) var(--b) no-repeat,
+    conic-gradient(var(--c) calc(var(--p)*1%),#0000 0);
+    -webkit-mask: radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
+    mask: radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
+}
+.pie:after {
+    inset: calc(50% - var(--b)/2);
+    background: var(--c);
+    transform: rotate(calc(var(--p)*3.6deg)) translateY(calc(50% - var(--w)/2));
+}
+.animate {
+    animation: p 1s .5s both;
+}
+.no-round:before {
+    background-size: 0 0, auto;
+}
+.no-round:after {
+    content: none;
+}
+@keyframes p{
+    from{--p:0}
+}
+
+.pie-label {
+    margin-left:3rem;
+    margin-right:2rem;
+    margin-bottom: 2rem;
+}
+
+.pie-desc {
+    margin-left:3rem;
+    margin-right:2rem;
+}
+
+/* for references */
+.book {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    position: relative;
+    display: inline-block;
+    margin: 10px 10px;
+    text-align: center;
+    font-family: arial;
+    background-color: rgb(212, 182, 182);
+}
+
+#id_skill,#id_level,#id_language {
+    vertical-align: top;
+}
+
+.filter-section {
+    width: 100%;
+}
+
+.button, #advanced {
+    border: 0.5px solid black;
+    transition: 0.4s ease;
+    width: 150px;
+    height: 35px;
+    font:600 16px/18px URW Chancery L, cursive;
+}
+
+.button:hover {
+    opacity: 0.7;
+}
+
+.cover {
+    width:150px;
+    height: 180px;
+}
+
+.level {
+    color: grey;
+    font-size: 22px;
+}
+
+.description {
+    height: 72px;
+    overflow: hidden;
+}
+
+.book button {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+button:hover {
+    opacity: 0.7;
+}
+
+/* for reference details */
+.image {
+    position:absolute;
+    left: 380px;
+    top: 150px;
+    display: flex;
+}
+
+.bookImg {
+    height: 400px;
+    width: 300px;
+}
+
+.information {
+    font: 600 16px/18px Arial, Helvetica, sans-serif;
+    margin: 10px;
+    position: absolute;
+    width: 700px;
+    top: 150px;
+    left: 700px;
+    right: 150px;
+}
+
+.btn {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+.btn a {
+    text-decoration: none;
+    color: white;
+}
+
+.btn:hover {
+    opacity: 0.7;
+}
+
+.tag {
+    border-radius: 20px;
+    background-color: gray;
+    padding:3px;
+}
+
+/* for quiz result */
+.card-img-top {
+    height: 15rem;
+    width:23rem;
+    margin-left: 27rem;
+}
+
+.card-body {
+    margin-left:27rem;
+    font-size: 2rem;
+}
+
+.card {
+    width: 80rem; 
+    border:5px black solid; 
+    background-color:rgb(220, 221, 155);
+    align-items: center;
+    font-weight: lighter;
+}
+
+.container {
+    margin-top:0px;
+}
+
+/* for quiz screen */
+.quiz-table {
+    width:1000px;
+    margin-left: 100px;
+    background-color: rgb(212, 212, 165);
+    border-radius: 20px;
+}
+
+.quiz-table th{
+    text-align: left;
+}
+
+.quiz-btn {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    background-color: rgb(133, 64, 64);
+    text-align: center;
+    font:600 16px/18px URW Chancery L, cursive;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+.quiz-btn:hover {
+    opacity: 0.7;
+}
+
+/* for letter screen */
+.letter-detail {
+    top:130px;
+    position: absolute;
+    display: inline-block;
+}
+
+.kana {
+    margin-right: 50px;
+    display: inline-block;
+    margin-left: 200px;
+}
+
+#paint-canvas {
+    cursor:crosshair;
+    box-sizing: border-box;
+    background-color: white;
+    height: 170px;
+    width:300px;
+}
+
+#hira_list button {
+    background-color: blanchedalmond;
+    font:600 16px/18px URW Chancery L, cursive;
+}
+
+#hira_list button:hover {
+    opacity: 0.7;
+}
+
+/* for edit profile and change pass */
+.submit {
+    margin-top:2rem;
+    width:20rem;
+    background-color: black;
+    color:white;
+    height: 3rem;
+}
+
+.submit:hover {
+    opacity: 0.7;
+}

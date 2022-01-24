@@ -1,0 +1,78 @@
+{% load static %}
+
+<!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <!--<title> Drop Down Sidebar Menu | CodingLab </title>-->
+    <link rel="stylesheet" href="{% static 'css/login_style.css'%}">
+    <title>Autolearn Japanese</title>
+    <link rel="icon" href={% static 'images/icon.png'%} type="image/icon type">
+   </head>
+    <body>
+        <div class="login-wrap">
+            <div class="login-html">
+                <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Log in</label>
+                <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab" style="margin-left: 5px">Sign up</label>
+                <div class="login-form">
+                    <form class="sign-in-htm" action="" method="post">
+                    {% csrf_token %}
+                        <div class="group">
+                            <label for="username" class="label">Username</label>
+                            <input id="username" name="username" type="text" class="input" Required>
+                        </div>
+                        <div class="group">
+                            <label for="pass" class="label">Password</label>
+                            <input id="pass" name="pass" type="password" class="input" data-type="password" Required>
+                        </div>
+                        <div class="group">
+                            <input id="check" name="check" type="checkbox" class="check" checked>
+                            <label for="check"><span class="icon"></span> Keep me logged in</label>
+                        </div>
+                        <div class="group">
+                            <input type="submit" class="button" name="sign_in" value="Log in">
+                        </div>
+                        <div class="message">
+                            {% include 'messages.html' %}
+                        </div>
+                        <div class="hr"></div>
+                        <div class="foot-lnk">
+                            <a href="login/forgot">Forgot password?</a>
+                        </div>
+                    </form>
+                    <form class="sign-up-htm" action="" method="post">
+                    {% csrf_token %}
+                        <div class="group">
+                            <label for="username" class="label">Username</label>
+                            <input id="username" name="username" type="text" class="input" Required>
+                        </div>
+                        <div class="group">
+                            <label for="email" class="label">Email</label>
+                            <input id="email" name="email" type="text" class="input" Required>
+                        </div>
+                        <div class="group">
+                            <label for="pass1" class="label">Password</label>
+                            <input id="pass1" name="pass1"  type="password" class="input" data-type="password" Required>
+                        </div>
+                        <div class="group">
+                            <label for="pass2" class="label">Verify Password</label>
+                            <input id="pass2" name="pass2" type="password" class="input" data-type="password" Required>
+                        </div>
+                        <div class="group">
+                            <label for="lname" class="label">Last name</label>
+                            <input id="lname" name="lname" type="text" class="input" Required>
+                        </div>
+                        <div class="group">
+                            <label for="fname" class="label">First name</label>
+                            <input id="fname" name="fname" type="text" class="input" Required>
+                        </div>
+                        <div class="group" style="margin-top: 30px">
+                            <input type="submit" class="button" name="sign_up" value="Sign up">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

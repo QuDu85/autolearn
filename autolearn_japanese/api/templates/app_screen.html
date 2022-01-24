@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Autolearn Japanese</title>
+    <link rel="icon" href={% static 'images/icon.png'%} type="image/icon type">
+    <link rel="stylesheet" type="text/css" href="{% static "css/app_screen_style.css" %}"
+    />
+    <script src="{% static 'scripts/home_scripts.js'%}"></script>
+  </head>
+  <body>
+    {% if user.is_authenticated %}
+        <div class="username-button">
+            <button class="login-button" onclick="signout()">Hello <br> {{ fname}}</button>
+        </div>
+
+    {% else %}
+        <div class="login-wrap">
+            <button class="login-button" onclick="login()">Log in</button>
+        </div>
+    {% endif %}
+  </body>
+</html>

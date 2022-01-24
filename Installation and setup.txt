@@ -1,0 +1,7 @@
+Yêu cầu:
+- Python
+Cài đặt Django:
+- pip install django/djangorestframework
+Chạy project:
+- Vào cmd của folder autolearn_japanese (có chứa file manage.py)
+- Chạy câu lệnh python .\manage.py runserver

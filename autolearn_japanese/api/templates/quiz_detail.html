@@ -1,0 +1,102 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/home_student_style.css'%}">
+    <title>Autolearn Japanese</title>
+    <link rel="icon" href={% static 'images/icon.png'%} type="image/icon type">
+    <script src="{% static 'scripts/home_scripts.js'%}"></script>
+</head>
+<body>
+    <section>
+        <div class="header">
+            <div><a href="http://127.0.0.1:8000/student/home"><img class="icon" src={% static 'images/icon.png' %} alt="Autolearn icon"/></a></div>
+            <div class="dropdown">
+                <button class="dropbtn">Letters</button>
+                <div class="dropdown-content">
+                    <a href="http://127.0.0.1:8000/student/letters/Hiragana">Hiragana</a>
+                    <a href="http://127.0.0.1:8000/student/letters/Katakana">Katakana</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">Quizzes</button>
+                <div class="dropdown-content">
+                    <a href="http://127.0.0.1:8000/student/quiz/Beginner">Beginner</a>
+                    <a href="http://127.0.0.1:8000/student/quiz/Intermediate">Intermediate</a>
+                    <a href="http://127.0.0.1:8000/student/quiz/Advanced">Advanced</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn" onclick="reference()">References</button>
+            </div>
+            <div><button class="logout" onclick = "signout()">Log out</button></div>
+        </div>
+        <div class="dashboard">
+            {% block content %}
+            <div class="container">
+                <h1>{{quiz.name}}</h1>
+                
+                <div align="right " id="displaytimer"><b>Timer: 0 seconds</b></div>
+                
+                <form method='post' action=''>
+                    {% csrf_token %}
+                    {% for q  in questions%}
+                    <div class="form-group">
+                        <label for="question">Question #{{forloop.counter}}: {{q.question}}</label>
+                    </div>
+                    <div class="form-check">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios1" value="A" checked>
+                            <label class="form-check-label" for="gridRadios1">
+                                {{q.op1}}
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios2" value="B">
+                            <label class="form-check-label" for="gridRadios2">
+                                {{q.op2}}
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios1" value="C">
+                            <label class="form-check-label" for="gridRadios1">
+                                {{q.op3}}
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios2" value="D">
+                            <label class="form-check-label" for="gridRadios2">
+                                {{q.op4}}
+                            </label>
+                        </div>
+                        <br>
+                    </div>    
+                    {% endfor %}
+                    <input id='timer' type='hidden' name="timer" value="">
+                    <button type="submit">Submit</button>
+                </form>
+                {% block script %}
+                <script>
+                    
+                    console.log('hello world')
+                    const timer=document.getElementById('displaytimer')
+                    console.log(timer.textContent)
+                    const inputtag = document.getElementById('timer')
+                    
+                    t=0
+                    setInterval(()=>{
+                        t+=1
+                        timer.innerHTML ="<b>Timer: " +t+" seconds</b>"
+                        inputtag.value = t
+                    },1000)
+                </script>
+                {% endblock script %}
+                
+            </div>
+            {% endblock %}
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{% static 'css/home_student_style.css'%}">
+        <title>Autolearn Japanese</title>
+        <link rel="icon" href={% static 'images/icon.png'%} type="image/icon type">
+        <script src="{% static 'scripts/home_scripts.js'%}"></script>
+    </head>
+    <body>
+        <section>
+            <div class="header">
+                <div><a href="http://127.0.0.1:8000/student/home"><img class="icon" src={% static 'images/icon.png' %} alt="Autolearn icon"/></a></div>
+                <div class="dropdown">
+                    <button class="dropbtn">Letters</button>
+                    <div class="dropdown-content">
+                        <a href="http://127.0.0.1:8000/student/letters/Hiragana">Hiragana</a>
+                        <a href="http://127.0.0.1:8000/student/letters/Katakana">Katakana</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Quizzes</button>
+                    <div class="dropdown-content">
+                        <a href="http://127.0.0.1:8000/student/quiz/Beginner">Beginner</a>
+                        <a href="http://127.0.0.1:8000/student/quiz/Intermediate">Intermediate</a>
+                        <a href="http://127.0.0.1:8000/student/quiz/Advanced">Advanced</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn" onclick="reference()">References</button>
+                </div>
+                <div><button class="logout" onclick = "signout()">Log out</button></div>
+            </div>
+            <div class="dashboard">
+                <div><h1>Welcome {{user.first_name}}</h1></div>
+                <label for="file">Your progress:</label>
+                <progress id="file" value="{{completed}}" max="{{total}}"></progress>
+                <span>{{percent}}%</span>
+                <p>Total Quizzes completed: </p>
+                <div class="pie-header">
+                    <span class="pie-label">Beginner</span>
+                    <span class="pie-label">Intermediate</span>
+                    <span class="pie-label">Advanced</span>
+                </div>
+                <div class="pie-chart">
+                    <div class="pie" style="--p:{{percentBeginner}};--c:darkblue;--b:10px">{{percentBeginner}}%</div>
+                    <div class="pie" style="--p:{{percentIntermediate}};--c:darkblue;--b:10px">{{percentIntermediate}}%</div>
+                    <div class="pie" style="--p:{{percentAdvanced}};--c:darkblue;--b:10px">{{percentAdvanced}}%</div>
+                </div>
+                <div class="pie-footer">
+                    <span class="pie-desc">{{beginnerDone}} out of {{totalBeginner}}</span>
+                    <span class="pie-desc">{{intermediateDone}} out of {{totalIntermediate}}</span>
+                    <span class="pie-desc">{{advancedDone}} out of {{totalAdvanced}}</span>
+                </div>
+                <div>
+                    <button class="edit" onclick="edit()">Edit Profile</button>
+                    <button class="edit" onclick="change()">Change Password</button>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

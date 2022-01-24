@@ -1,0 +1,562 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/home_student_style.css'%}">
+    <title>Autolearn Japanese</title>
+    <link rel="icon" href={% static 'images/icon.png'%} type="image/icon type">
+    <script src="{% static 'scripts/home_scripts.js'%}"></script>
+</head>
+<body>
+    <section>
+        <div class="header">
+            <div><a href="http://127.0.0.1:8000/student/home"><img class="icon" src={% static 'images/icon.png' %} alt="Autolearn icon"/></a></div>
+            <div class="dropdown">
+                <button class="dropbtn">Letters</button>
+                <div class="dropdown-content">
+                    <a href="http://127.0.0.1:8000/student/letters/Hiragana">Hiragana</a>
+                    <a href="http://127.0.0.1:8000/student/letters/Katakana">Katakana</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">Quizzes</button>
+                <div class="dropdown-content">
+                    <a href="http://127.0.0.1:8000/student/quiz/Beginner">Beginner</a>
+                    <a href="http://127.0.0.1:8000/student/quiz/Intermediate">Intermediate</a>
+                    <a href="http://127.0.0.1:8000/student/quiz/Advanced">Advanced</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn" onclick="reference()">References</button>
+            </div>
+            <div><button class="logout" onclick = "signout()">Log out</button></div>
+        </div>
+        <div class="dashboard">
+            <div id="hira_list" class="kana">
+                {% if chart == 'Hiragana' %}
+                <table border="5" cellspacing="8" cellpadding="0" id="chartable_hira">
+                    <tbody>
+                        <tr>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-a">あ</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-i">い</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-u">う</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-e">え</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-o">お</a></td>
+                            <td class="non"> </td>
+                        </tr>
+                        <tr>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-ka">か</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-ki">き</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-ku">く</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-ke">け</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-ko">こ</a></td>
+                            <td class="non"><span onclick="shoukana('か')"><img data-savepage-currentsrc="http://www.coelang.tufs.ac.jp/mt/ja/basic/img/tree1.gif" data-savepage-src="./img/tree1.gif" src="data:image/gif;base64,R0lGODlhLQAtALMAANSwsNvAwOzl5ePR0dW0tOjd3d3ExPDt7dm8vOTV1eHMzAAAAAAAAAAAAAAAAAAAACH5BAQUAP8ALAAAAAAtAC0AAARdEMhJq7046827/2AojmRpnmiqrmzrvnAsz3RtW8g9BYKgE4XDwWcbCIXEmUFwRM4QzKYTRkhIm0lX8HrMunjcIU3B9VKt2BshKtaBzbVBQUev2+/4vH7P7/v/gHQRADs=" width="30" height="30" id="tree_k"></span></td>
+                        </tr>
+                        <tr id="k_1" style="display:none;" class="kakushi">
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_1.mp3')">が</span></td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_2.mp3')">ぎ</span></td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_3.mp3')">ぐ</span></td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_4.mp3')">げ</span></td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_5.mp3')">ご</span></td>
+                            <td class="non"> </td>
+                        </tr>
+                        <tr id="k_2" style="display:none;" class="kakushi">
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_1.mp3')">きゃ</span></td>
+                            <td class="sub_non"> </td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_2.mp3')">きゅ</span></td>
+                            <td class="sub_non"> </td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_3.mp3')">きょ</span></td>
+                            <td class="non"> </td>
+                        </tr>
+                        <tr id="k_3" style="display:none;" class="kakushi">
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_4.mp3')">ぎゃ</span></td>
+                            <td class="sub_non"> </td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_5.mp3')">ぎゅ</span></td>
+                            <td class="sub_non"> </td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_6.mp3')">ぎょ</span></td>
+                            <td class="non"> </td>
+                        </tr>
+                        <tr>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-sa">さ</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-shi">し</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-su">す</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-se">せ</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-so">そ</a></td>
+                            <td class="non"><span onclick="shoukana('さ')"><img data-savepage-currentsrc="http://www.coelang.tufs.ac.jp/mt/ja/basic/img/tree1.gif" data-savepage-src="./img/tree1.gif" src="data:image/gif;base64,R0lGODlhLQAtALMAANSwsNvAwOzl5ePR0dW0tOjd3d3ExPDt7dm8vOTV1eHMzAAAAAAAAAAAAAAAAAAAACH5BAQUAP8ALAAAAAAtAC0AAARdEMhJq7046827/2AojmRpnmiqrmzrvnAsz3RtW8g9BYKgE4XDwWcbCIXEmUFwRM4QzKYTRkhIm0lX8HrMunjcIU3B9VKt2BshKtaBzbVBQUev2+/4vH7P7/v/gHQRADs=" id="tree_s"></span></td>
+                        </tr>
+                        <tr id="s_1" style="display:none;" class="kakushi">
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_6.mp3')">ざ</span></td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_7.mp3')">じ</span></td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_8.mp3')">ず</span></td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_9.mp3')">ぜ</span></td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_10.mp3')">ぞ</span></td>
+                            <td class="non"> </td>
+                        </tr>
+                        <tr id="s_2" style="display:none;" class="kakushi">
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_7.mp3')">しゃ</span></td>
+                            <td class="sub_non"> </td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_8.mp3')">しゅ</span></td>
+                            <td class="sub_non"> </td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_9.mp3')">しょ</span></td>
+                            <td class="non"> </td>
+                        </tr>
+                        <tr id="s_3" style="display:none;" class="kakushi">
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_10.mp3')">じゃ</span></td>
+                            <td class="sub_non"> </td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_11.mp3')">じゅ</span></td>
+                            <td class="sub_non"> </td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_12.mp3')">じょ</span></td>
+                            <td class="non"> </td>
+                        </tr>
+                        <tr>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-ta">た</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-chi">ち</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-tsu">つ</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-te">て</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-to">と</a></td>
+                            <td class="non"><span onclick="shoukana('た')"><img data-savepage-currentsrc="http://www.coelang.tufs.ac.jp/mt/ja/basic/img/tree1.gif" data-savepage-src="./img/tree1.gif" src="data:image/gif;base64,R0lGODlhLQAtALMAANSwsNvAwOzl5ePR0dW0tOjd3d3ExPDt7dm8vOTV1eHMzAAAAAAAAAAAAAAAAAAAACH5BAQUAP8ALAAAAAAtAC0AAARdEMhJq7046827/2AojmRpnmiqrmzrvnAsz3RtW8g9BYKgE4XDwWcbCIXEmUFwRM4QzKYTRkhIm0lX8HrMunjcIU3B9VKt2BshKtaBzbVBQUev2+/4vH7P7/v/gHQRADs=" id="tree_t"></span></td>
+                        </tr>
+                        <tr id="t_1" style="display:none;" class="kakushi">
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_11.mp3')">だ</span></td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_12.mp3')">ぢ</span></td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_13.mp3')">づ</span></td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_14.mp3')">で</span></td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_15.mp3')">ど</span></td>
+                            <td class="non"> </td>
+                        </tr>
+                        <tr id="t_2" style="display:none;" class="kakushi">
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_13.mp3')">ちゃ</span></td>
+                            <td class="sub_non"> </td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_14.mp3')">ちゅ</span></td>
+                            <td class="sub_non"> </td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_15.mp3')">ちょ</span></td>
+                            <td class="non"> </td>
+                        </tr>
+                        <tr id="t_3" style="display:none;" class="kakushi">
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_16.mp3')">ぢゃ</span></td>
+                            <td class="sub_non"> </td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_17.mp3')">ぢゅ</span></td>
+                            <td class="sub_non"> </td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_18.mp3')">ぢょ</span></td>
+                            <td class="non"> </td>
+                        </tr>
+                        <tr>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-na">な</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-ni">に</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-nu">ぬ</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-ne">ね</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-no">の</a></td>
+                            <td class="non"><span onclick="shoukana('な')"><img data-savepage-currentsrc="http://www.coelang.tufs.ac.jp/mt/ja/basic/img/tree1.gif" data-savepage-src="./img/tree1.gif" src="data:image/gif;base64,R0lGODlhLQAtALMAANSwsNvAwOzl5ePR0dW0tOjd3d3ExPDt7dm8vOTV1eHMzAAAAAAAAAAAAAAAAAAAACH5BAQUAP8ALAAAAAAtAC0AAARdEMhJq7046827/2AojmRpnmiqrmzrvnAsz3RtW8g9BYKgE4XDwWcbCIXEmUFwRM4QzKYTRkhIm0lX8HrMunjcIU3B9VKt2BshKtaBzbVBQUev2+/4vH7P7/v/gHQRADs=" id="tree_n"></span></td>
+                        </tr>
+                        <tr id="n_1" style="display:none;" class="kakushi">
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_19.mp3')">にゃ</span></td>
+                            <td class="sub_non"> </td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_20.mp3')">にゅ</span></td>
+                            <td class="sub_non"> </td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_21.mp3')">にょ</span></td>
+                            <td class="non"> </td>
+                        </tr>
+                        <tr>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-ha">は</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-hi">ひ</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-fu">ふ</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-he">へ</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-ho">ほ</a></td>
+                            <td class="non"><span onclick="shoukana('は')"><img data-savepage-currentsrc="http://www.coelang.tufs.ac.jp/mt/ja/basic/img/tree1.gif" data-savepage-src="./img/tree1.gif" src="data:image/gif;base64,R0lGODlhLQAtALMAANSwsNvAwOzl5ePR0dW0tOjd3d3ExPDt7dm8vOTV1eHMzAAAAAAAAAAAAAAAAAAAACH5BAQUAP8ALAAAAAAtAC0AAARdEMhJq7046827/2AojmRpnmiqrmzrvnAsz3RtW8g9BYKgE4XDwWcbCIXEmUFwRM4QzKYTRkhIm0lX8HrMunjcIU3B9VKt2BshKtaBzbVBQUev2+/4vH7P7/v/gHQRADs=" id="tree_h"></span></td>
+                        </tr>
+                        <tr id="h_1" style="display:none;" class="kakushi">
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_16.mp3')">ば</span></td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_17.mp3')">び</span></td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_18.mp3')">ぶ</span></td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_19.mp3')">べ</span></td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_20.mp3')">ぼ</span></td>
+                            <td class="non"> </td>
+                        </tr>
+                        <tr id="h_2" style="display:none;" class="kakushi">
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_21.mp3')">ぱ</span></td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_22.mp3')">ぴ</span></td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_23.mp3')">ぷ</span></td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_24.mp3')">ぺ</span></td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/2_25.mp3')">ぽ</span></td>
+                            <td class="non"> </td>
+                        </tr>
+                        <tr id="h_3" style="display:none;" class="kakushi">
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_22.mp3')">ひゃ</span></td>
+                            <td class="sub_non"> </td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_23.mp3')">ひゅ</span></td>
+                            <td class="sub_non"> </td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_24.mp3')">ひょ</span></td>
+                            <td class="non"> </td>
+                        </tr>
+                        <tr id="h_4" style="display:none;" class="kakushi">
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_25.mp3')">びゃ</span></td>
+                            <td class="sub_non"> </td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_26.mp3')">びゅ</span></td>
+                            <td class="sub_non"> </td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_27.mp3')">びょ</span></td>
+                            <td class="non"> </td>
+                        </tr>
+                        <tr id="h_5" style="display:none;" class="kakushi">
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_28.mp3')">ぴゃ</span></td>
+                            <td class="sub_non"> </td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_29.mp3')">ぴゅ</span></td>
+                            <td class="sub_non"> </td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_30.mp3')">ぴょ</span></td>
+                            <td class="non"> </td>
+                        </tr>
+                        <tr>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-ma">ま</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-mi">み</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-mu">む</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-me">め</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-mo">も</a></td>
+                            <td class="non"><span onclick="shoukana('ま')"><img data-savepage-currentsrc="http://www.coelang.tufs.ac.jp/mt/ja/basic/img/tree1.gif" data-savepage-src="./img/tree1.gif" src="data:image/gif;base64,R0lGODlhLQAtALMAANSwsNvAwOzl5ePR0dW0tOjd3d3ExPDt7dm8vOTV1eHMzAAAAAAAAAAAAAAAAAAAACH5BAQUAP8ALAAAAAAtAC0AAARdEMhJq7046827/2AojmRpnmiqrmzrvnAsz3RtW8g9BYKgE4XDwWcbCIXEmUFwRM4QzKYTRkhIm0lX8HrMunjcIU3B9VKt2BshKtaBzbVBQUev2+/4vH7P7/v/gHQRADs=" id="tree_m"></span></td>
+                        </tr>
+                        <tr id="m_1" style="display:none;" class="kakushi">
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_31.mp3')">みゃ</span></td>
+                            <td class="sub_non"> </td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_32.mp3')">みゅ</span></td>
+                            <td class="sub_non"> </td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_33.mp3')">みょ</span></td>
+                            <td class="non"> </td>
+                        </tr>
+                        <tr>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-ya">や</a></td>
+                            <td class="sub_non2"> </td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-yu">ゆ</a></td>
+                            <td class="sub_non2"> </td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-yo">よ</a></td>
+                            <td class="non"> </td>
+                        </tr>
+                        <tr>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-ra">ら</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-ri">り</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-ru">る</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-re">れ</a></td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-ro">ろ</a></td>
+                            <td class="non"><span onclick="shoukana('ら')"><img data-savepage-currentsrc="http://www.coelang.tufs.ac.jp/mt/ja/basic/img/tree1.gif" data-savepage-src="./img/tree1.gif" src="data:image/gif;base64,R0lGODlhLQAtALMAANSwsNvAwOzl5ePR0dW0tOjd3d3ExPDt7dm8vOTV1eHMzAAAAAAAAAAAAAAAAAAAACH5BAQUAP8ALAAAAAAtAC0AAARdEMhJq7046827/2AojmRpnmiqrmzrvnAsz3RtW8g9BYKgE4XDwWcbCIXEmUFwRM4QzKYTRkhIm0lX8HrMunjcIU3B9VKt2BshKtaBzbVBQUev2+/4vH7P7/v/gHQRADs=" id="tree_r"></span></td>
+                        </tr>
+                        <tr id="r_1" style="display:none;" class="kakushi">
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_34.mp3')">りゃ</span></td>
+                            <td class="sub_non"> </td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_35.mp3')">りゅ</span></td>
+                            <td class="sub_non"> </td>
+                            <td class="sub"><span onclick="javascript:playItem('./sound/3_36.mp3')">りょ</span></td>
+                            <td class="non"> </td>
+                        </tr>
+                        <tr>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-wa">わ</a></td>
+                            <td class="sub_non2"> </td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-wo">を</a></td>
+                            <td class="sub_non2"> </td>
+                            <td><a href="http://127.0.0.1:8000/student/letters/Hiragana/hira-n">ん</a></td>
+                            <td class="non"> </td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% else %}
+                <table border="5" cellspacing="8" cellpadding="0" id="chartable_kata">
+                    <tbody><tr>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-a">ア</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-i">イ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-u">ウ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-e">エ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-o">オ</a></td>
+                        <td class="non"> </td>
+                    </tr>
+                    <tr>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-ka">カ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-ki">キ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-ku">ク</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-ke">ケ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-ko">コ</a></td>
+                        <td class="non"><span onclick="shoukana('カ')"><img data-savepage-currentsrc="http://www.coelang.tufs.ac.jp/mt/ja/basic/img/tree1.gif" data-savepage-src="./img/tree1.gif" src="data:image/gif;base64,R0lGODlhLQAtALMAANSwsNvAwOzl5ePR0dW0tOjd3d3ExPDt7dm8vOTV1eHMzAAAAAAAAAAAAAAAAAAAACH5BAQUAP8ALAAAAAAtAC0AAARdEMhJq7046827/2AojmRpnmiqrmzrvnAsz3RtW8g9BYKgE4XDwWcbCIXEmUFwRM4QzKYTRkhIm0lX8HrMunjcIU3B9VKt2BshKtaBzbVBQUev2+/4vH7P7/v/gHQRADs=" id="kttree_k"></span></td>
+                    </tr>
+                    <tr id="ktk_1" style="display:none;" class="kakushi">
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_1.mp3')">ガ</span></td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_2.mp3')">ギ</span></td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_3.mp3')">グ</span></td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_4.mp3')">ゲ</span></td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_5.mp3')">ゴ</span></td>
+                        <td class="non"> </td>
+                    </tr>
+                    <tr id="ktk_2" style="display:none;" class="kakushi">
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_1.mp3')">キャ</span></td>
+                        <td class="sub_non"> </td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_2.mp3')">キュ</span></td>
+                        <td class="sub_non"> </td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_3.mp3')">キョ</span></td>
+                        <td class="non"> </td>
+                    </tr>
+                    <tr id="ktk_3" style="display:none;" class="kakushi">
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_4.mp3')">ギャ</span></td>
+                        <td class="sub_non"> </td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_5.mp3')">ギュ</span></td>
+                        <td class="sub_non"> </td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_6.mp3')">ギョ</span></td>
+                        <td class="non"> </td>
+                    </tr>
+                    <tr>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-sa">サ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-shi">シ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-su">ス</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-se">セ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-so">ソ</a></td>
+                        <td class="non"><span onclick="shoukana('サ')"><img data-savepage-currentsrc="http://www.coelang.tufs.ac.jp/mt/ja/basic/img/tree1.gif" data-savepage-src="img/tree1.gif" src="data:image/gif;base64,R0lGODlhLQAtALMAANSwsNvAwOzl5ePR0dW0tOjd3d3ExPDt7dm8vOTV1eHMzAAAAAAAAAAAAAAAAAAAACH5BAQUAP8ALAAAAAAtAC0AAARdEMhJq7046827/2AojmRpnmiqrmzrvnAsz3RtW8g9BYKgE4XDwWcbCIXEmUFwRM4QzKYTRkhIm0lX8HrMunjcIU3B9VKt2BshKtaBzbVBQUev2+/4vH7P7/v/gHQRADs=" id="kttree_s"></span></td>
+                    </tr>
+                    <tr id="kts_1" style="display:none;" class="kakushi">
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_6.mp3')">ザ</span></td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_7.mp3')">ジ</span></td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_8.mp3')">ズ</span></td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_9.mp3')">ゼ</span></td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_10.mp3')">ゾ</span></td>
+                        <td class="non"> </td>
+                    </tr>
+                    <tr id="kts_2" style="display:none;" class="kakushi">
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_7.mp3')">シャ</span></td>
+                        <td class="sub_non"> </td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_8.mp3')">シュ</span></td>
+                        <td class="sub_non"> </td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_9.mp3')">ショ</span></td>
+                        <td class="non"> </td>
+                    </tr>
+                    <tr id="kts_3" style="display:none;" class="kakushi">
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_10.mp3')">ジャ</span></td>
+                        <td class="sub_non"> </td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_11.mp3')">ジュ</span></td>
+                        <td class="sub_non"> </td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_12.mp3')">ジョ</span></td>
+                        <td class="non"> </td>
+                    </tr>
+                    <tr>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-ta">タ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-chi">チ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-tsu">ツ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-te">テ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-to">ト</a></td>
+                        <td class="non"><span onclick="shoukana('タ')"><img data-savepage-currentsrc="http://www.coelang.tufs.ac.jp/mt/ja/basic/img/tree1.gif" data-savepage-src="img/tree1.gif" src="data:image/gif;base64,R0lGODlhLQAtALMAANSwsNvAwOzl5ePR0dW0tOjd3d3ExPDt7dm8vOTV1eHMzAAAAAAAAAAAAAAAAAAAACH5BAQUAP8ALAAAAAAtAC0AAARdEMhJq7046827/2AojmRpnmiqrmzrvnAsz3RtW8g9BYKgE4XDwWcbCIXEmUFwRM4QzKYTRkhIm0lX8HrMunjcIU3B9VKt2BshKtaBzbVBQUev2+/4vH7P7/v/gHQRADs=" id="kttree_t"></span></td>
+                    </tr>
+                    <tr id="ktt_1" style="display:none;" class="kakushi">
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_11.mp3')">ダ</span></td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_12.mp3')">ヂ</span></td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_13.mp3')">ヅ</span></td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_14.mp3')">デ</span></td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_15.mp3')">ド</span></td>
+                        <td class="non"> </td>
+                    </tr>
+                    <tr id="ktt_2" style="display:none;" class="kakushi">
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_13.mp3')">チャ</span></td>
+                        <td class="sub_non"> </td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_14.mp3')">チュ</span></td>
+                        <td class="sub_non"> </td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_15.mp3')">チョ</span></td>
+                        <td class="non"> </td>
+                    </tr>
+                    <tr id="ktt_3" style="display:none;" class="kakushi">
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_16.mp3')">ヂャ</span></td>
+                        <td class="sub_non"> </td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_17.mp3')">ヂュ</span></td>
+                        <td class="sub_non"> </td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_18.mp3')">ヂョ</span></td>
+                        <td class="non"> </td>
+                    </tr>
+                    <tr>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-na">ナ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-ni">ニ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-nu">ヌ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-ne">ネ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-no">ノ</a></td>
+                        <td class="non"><span onclick="shoukana('ナ')"><img data-savepage-currentsrc="http://www.coelang.tufs.ac.jp/mt/ja/basic/img/tree1.gif" data-savepage-src="img/tree1.gif" src="data:image/gif;base64,R0lGODlhLQAtALMAANSwsNvAwOzl5ePR0dW0tOjd3d3ExPDt7dm8vOTV1eHMzAAAAAAAAAAAAAAAAAAAACH5BAQUAP8ALAAAAAAtAC0AAARdEMhJq7046827/2AojmRpnmiqrmzrvnAsz3RtW8g9BYKgE4XDwWcbCIXEmUFwRM4QzKYTRkhIm0lX8HrMunjcIU3B9VKt2BshKtaBzbVBQUev2+/4vH7P7/v/gHQRADs=" id="kttree_n"></span></td>
+                    </tr>
+                    <tr id="ktn_1" style="display:none;" class="kakushi">
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_19.mp3')">ニャ</span></td>
+                        <td class="sub_non"> </td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_20.mp3')">ニュ</span></td>
+                        <td class="sub_non"> </td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_21.mp3')">ニョ</span></td>
+                        <td class="non"> </td>
+                    </tr>
+                    <tr>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-ha">ハ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-hi">ヒ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-fu">フ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-he">ヘ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-ho">ホ</a></td>
+                        <td class="non"><span onclick="shoukana('ハ')"><img data-savepage-currentsrc="http://www.coelang.tufs.ac.jp/mt/ja/basic/img/tree1.gif" data-savepage-src="img/tree1.gif" src="data:image/gif;base64,R0lGODlhLQAtALMAANSwsNvAwOzl5ePR0dW0tOjd3d3ExPDt7dm8vOTV1eHMzAAAAAAAAAAAAAAAAAAAACH5BAQUAP8ALAAAAAAtAC0AAARdEMhJq7046827/2AojmRpnmiqrmzrvnAsz3RtW8g9BYKgE4XDwWcbCIXEmUFwRM4QzKYTRkhIm0lX8HrMunjcIU3B9VKt2BshKtaBzbVBQUev2+/4vH7P7/v/gHQRADs=" id="kttree_h"></span></td>
+                    </tr>
+                    <tr id="kth_1" style="display:none;" class="kakushi">
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_16.mp3')">バ</span></td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_17.mp3')">ビ</span></td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_18.mp3')">ブ</span></td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_19.mp3')">ベ</span></td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_20.mp3')">ボ</span></td>
+                        <td class="non"> </td>
+                    </tr>
+                    <tr id="kth_2" style="display:none;" class="kakushi">
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_21.mp3')">パ</span></td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_22.mp3')">ピ</span></td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_23.mp3')">プ</span></td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_24.mp3')">ペ</span></td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/2_25.mp3')">ポ</span></td>
+                        <td class="non"> </td>
+                    </tr>
+                    <tr id="kth_3" style="display:none;" class="kakushi">
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_22.mp3')">ヒャ</span></td>
+                        <td class="sub_non"> </td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_23.mp3')">ヒュ</span></td>
+                        <td class="sub_non"> </td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_24.mp3')">ヒョ</span></td>
+                        <td class="non"> </td>
+                    </tr>
+                    <tr id="kth_4" style="display:none;" class="kakushi">
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_25.mp3')">ビャ</span></td>
+                        <td class="sub_non"> </td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_26.mp3')">ビュ</span></td>
+                        <td class="sub_non"> </td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_27.mp3')">ビョ</span></td>
+                        <td class="non"> </td>
+                    </tr>
+                    <tr id="kth_5" style="display:none;" class="kakushi">
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_28.mp3')">ピャ</span></td>
+                        <td class="sub_non"> </td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_29.mp3')">ピュ</span></td>
+                        <td class="sub_non"> </td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_30.mp3')">ピョ</span></td>
+                        <td class="non"> </td>
+                    </tr>
+                    <tr>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-ma">マ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-mi">ミ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-mu">ム</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-me">メ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-mo">モ</a></td>
+                        <td class="non"><span onclick="shoukana('マ')"><img data-savepage-currentsrc="http://www.coelang.tufs.ac.jp/mt/ja/basic/img/tree1.gif" data-savepage-src="img/tree1.gif" src="data:image/gif;base64,R0lGODlhLQAtALMAANSwsNvAwOzl5ePR0dW0tOjd3d3ExPDt7dm8vOTV1eHMzAAAAAAAAAAAAAAAAAAAACH5BAQUAP8ALAAAAAAtAC0AAARdEMhJq7046827/2AojmRpnmiqrmzrvnAsz3RtW8g9BYKgE4XDwWcbCIXEmUFwRM4QzKYTRkhIm0lX8HrMunjcIU3B9VKt2BshKtaBzbVBQUev2+/4vH7P7/v/gHQRADs=" id="kttree_m"></span></td>
+                    </tr>
+                    <tr id="ktm_1" style="display:none;" class="kakushi">
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_31.mp3')">ミャ</span></td>
+                        <td class="sub_non"> </td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_32.mp3')">ミュ</span></td>
+                        <td class="sub_non"> </td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_33.mp3')">ミョ</span></td>
+                        <td class="non"> </td>
+                    </tr>
+                    <tr>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-ya">ヤ</a></td>
+                        <td class="sub_non"> </td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-yu">ユ</a></td>
+                        <td class="sub_non"> </td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-yo">ヨ</a></td>
+                        <td class="non"> </td>
+                    </tr>
+                    <tr>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-ra">ラ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-ri">リ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-ru">ル</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-re">レ</a></td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-ro">ロ</a></td>
+                        <td class="non"><span onclick="shoukana('ラ')"><img data-savepage-currentsrc="http://www.coelang.tufs.ac.jp/mt/ja/basic/img/tree1.gif" data-savepage-src="img/tree1.gif" src="data:image/gif;base64,R0lGODlhLQAtALMAANSwsNvAwOzl5ePR0dW0tOjd3d3ExPDt7dm8vOTV1eHMzAAAAAAAAAAAAAAAAAAAACH5BAQUAP8ALAAAAAAtAC0AAARdEMhJq7046827/2AojmRpnmiqrmzrvnAsz3RtW8g9BYKgE4XDwWcbCIXEmUFwRM4QzKYTRkhIm0lX8HrMunjcIU3B9VKt2BshKtaBzbVBQUev2+/4vH7P7/v/gHQRADs=" id="kttree_r"></span></td>
+                    </tr>
+                    <tr id="ktr_1" style="display:none;" class="kakushi">
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_34.mp3')">リャ</span></td>
+                        <td class="sub_non"> </td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_35.mp3')">リュ</span></td>
+                        <td class="sub_non"> </td>
+                        <td class="sub"><span onclick="javascript:playItem('./sound/3_36.mp3')">リョ</span></td>
+                        <td class="non"> </td>
+                    </tr>
+                    <tr>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-wa">ワ</a></td>
+                        <td class="sub_non"> </td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-wo">ヲ</a></td>
+                        <td class="sub_non"> </td>
+                        <td><a href="http://127.0.0.1:8000/student/letters/Katakana/kata-n">ン</a></td>
+                        <td class="non"> </td>
+                    </tr>
+                </tbody></table>
+                {% endif %}
+            </div>
+            <div class="letter-detail">
+                <p>Stroke and Sound:</p>
+                {% if chart == 'Hiragana' and not letter %} 
+                <video class="letter-video" width="320" height="240" controls>
+                    <source id="video" src="{% static 'videos/hira-a.mp4'%}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                {% elif not letter %}
+                <video class="letter-video" width="320" height="240" controls>
+                    <source id="video" src="{% static 'videos/kata-a.mp4'%}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                {% else %}
+                    {% with 'videos/'|add:letter|add:'.mp4' as video_static %}
+                    <video class="letter-video" width="320" height="240" controls>
+                        <source id="video" src="{% static video_static %}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    {% endwith %}
+                    </video>
+                {% endif %}
+                <p>Practice Writing:</p>
+                <canvas id="paint-canvas" width="300px" height="170px"></canvas>
+                <button id="clear">Clear</button>
+            </div>
+            </div>
+        </section>
+        <script>
+            window.onload = function () {
+                
+                // Definitions
+                var canvas = document.getElementById("paint-canvas");
+                var context = canvas.getContext("2d");
+                var boundings = canvas.getBoundingClientRect();
+                
+                // Specifications
+                var mouseX = 0;
+                var mouseY = 0;
+                context.strokeStyle = 'black'; // initial brush color
+                context.lineWidth = 3; // initial brush width
+                var isDrawing = false;
+                
+                // Mouse Down Event
+                canvas.addEventListener('mousedown', function(event) {
+                    setMouseCoordinates(event);
+                    isDrawing = true;
+                    
+                    // Start Drawing
+                    context.beginPath();
+                    context.moveTo(mouseX, mouseY);
+                });
+                
+                // Mouse Move Event
+                canvas.addEventListener('mousemove', function(event) {
+                    setMouseCoordinates(event);
+                    
+                    if(isDrawing){
+                        context.lineTo(mouseX, mouseY);
+                        context.stroke();
+                    }
+                });
+                
+                // Mouse Up Event
+                canvas.addEventListener('mouseup', function(event) {
+                    setMouseCoordinates(event);
+                    isDrawing = false;
+                });
+                
+                // Handle Mouse Coordinates
+                function setMouseCoordinates(event) {
+                    mouseX = event.clientX - boundings.left;
+                    mouseY = event.clientY - boundings.top;
+                }
+                
+                // Handle Clear Button
+                var clearButton = document.getElementById('clear');
+                
+                clearButton.addEventListener('click', function() {
+                    context.clearRect(0, 0, canvas.width, canvas.height);
+                });
+            }
+        </script>
+    </body>
+    </html>

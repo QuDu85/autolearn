@@ -1,0 +1,62 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{% static 'css/home_student_style.css'%}">
+        <title>Autolearn Japanese</title>
+        <link rel="icon" href={% static 'images/icon.png'%} type="image/icon type">
+        <script src="{% static 'scripts/home_scripts.js'%}"></script>
+    </head>
+    <body>
+        <section>
+            <div class="header">
+                <div><a href="http://127.0.0.1:8000/student/home"><img class="icon" src={% static 'images/icon.png' %} alt="Autolearn icon"/></a></div>
+                <div class="dropdown">
+                    <button class="dropbtn">Letters</button>
+                    <div class="dropdown-content">
+                        <a href="http://127.0.0.1:8000/student/letters/Hiragana">Hiragana</a>
+                        <a href="http://127.0.0.1:8000/student/letters/Katakana">Katakana</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Quizzes</button>
+                    <div class="dropdown-content">
+                        <a href="http://127.0.0.1:8000/student/quiz/Beginner">Beginner</a>
+                        <a href="http://127.0.0.1:8000/student/quiz/Intermediate">Intermediate</a>
+                        <a href="http://127.0.0.1:8000/student/quiz/Advanced">Advanced</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn" onclick="reference()">References</button>
+                </div>
+                <div><button class="logout" onclick = "signout()">Log out</button></div>
+            </div>
+            <div class="dashboard">
+                <table class="quiz-table">
+                    <tr class="table-title">
+                        <th></th>
+                        <th>Quiz</th>
+                        <th>Level</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                    {% for quiz in Quizzes %}
+                    <tr>
+                        <td>0{{forloop.counter}}</td>
+                        <td>{{quiz.name}}</td>
+                        <td class="level">{{quiz.level}}</td>
+                        {% if quiz in quizCompleted %}
+                            <td class="status">Completed</td>
+                        {% else %}
+                            <td class="status">Not completed</td>
+                        {% endif %}
+                        <td><button class="quiz-btn" onclick="quiz({{quiz.id}})">TAKE QUIZ</button></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </section>
+    </body>
+</html>

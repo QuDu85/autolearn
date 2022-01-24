@@ -1,0 +1,70 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{% static 'css/home_student_style.css'%}">
+        <title>Autolearn Japanese</title>
+        <link rel="icon" href={% static 'images/icon.png'%} type="image/icon type">
+        <script src="{% static 'scripts/home_scripts.js'%}"></script>
+    </head>
+    <body>
+        <section>
+            <div class="header">
+                <div><a href="http://127.0.0.1:8000/student/home"><img class="icon" src={% static 'images/icon.png' %} alt="Autolearn icon"/></a></div>
+                <div class="dropdown">
+                    <button class="dropbtn">Letters</button>
+                    <div class="dropdown-content">
+                        <a href="http://127.0.0.1:8000/student/letters/Hiragana">Hiragana</a>
+                        <a href="http://127.0.0.1:8000/student/letters/Katakana">Katakana</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Quizzes</button>
+                    <div class="dropdown-content">
+                        <a href="http://127.0.0.1:8000/student/quiz/Beginner">Beginner</a>
+                        <a href="http://127.0.0.1:8000/student/quiz/Intermediate">Intermediate</a>
+                        <a href="http://127.0.0.1:8000/student/quiz/Advanced">Advanced</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn" onclick="reference()">References</button>
+                </div>
+                <div><button class="logout" onclick = "signout()">Log out</button></div>
+            </div>
+            <div class="dashboard">
+                <div class="image">
+                    <img src="{{ book.image.url }}" alt="{{book.title}}" class="bookImg">
+                </div>
+                <div class="information">
+                    <h1>{{book.title}}</h1>
+                    <p><strong>Level: <strong> {{book.level}}</p>
+                    <div class="tags">
+                        <span><strong>Tags:</strong></span>
+                        {% for tag in topics %}
+                        <span class="tag">{{tag.topic}}</span>
+                        {% endfor %}
+                    </div>
+                    <br>
+                    <div class="tags">
+                        <span><strong>Skills:</strong></span>
+                        {% for skill in skills %}
+                        <span class="tag">{{skill.skill}}</span>
+                        {% endfor %}
+                    </div>
+                    <br>
+                    <div class="tags">
+                        <span><strong>Language:</strong></span>
+                        {% for language in languages %}
+                        <span class="tag">{{language.language}}</span>
+                        {% endfor %}
+                    </div>
+                    <p><strong>Length: </strong>{{book.length}} Pages</p>
+                    <p>{{book.description}}</p>
+                    <p class="btn"><a href={{book.link}}>Go to link</a></p>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

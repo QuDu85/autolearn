@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/forget_passwd_style.css'%}">
+    <title>Autolearn Japanese</title>
+    <link rel="icon" href={% static 'images/icon.png'%} type="image/icon type">
+   </head>
+    <body>
+        <div class="login-wrap">
+            <div class="login-html">
+                <label for="login-form" class="tab1">Forgot Password</label>
+                <label for="login-form" class="tab2">Enter your username and email to retrieve password</label>
+                <div class="login-form">
+                    <form class="sign-in-htm" action="" method="post">
+                    {% csrf_token %}
+                        <div class="group">
+                            <label for="username" class="label">Username</label>
+                            <input id="username" name="username" type="text" class="input" Required>
+                        </div>
+                        <div class="group">
+                            <label for="email" class="label">Email</label>
+                            <input id="email" name="email" type="text" class="input"  Required>
+                        </div>
+
+                        <div class="group">
+                            <input type="submit" class="button" name="sign_in" value="Reset password">
+                        </div>
+                        <div class="message">
+                            {% include 'messages.html' %}
+                        </div>
+                        <div class="hr"></div>
+                        <div class="foot-lnk">
+                            <a href="/login">Back to log in?</a>
+                        </div>
+                    </form>
+                   
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

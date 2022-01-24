@@ -1,0 +1,100 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{% static 'css/home_student_style.css'%}">
+        <title>Autolearn Japanese</title>
+        <link rel="icon" href={% static 'images/icon.png'%} type="image/icon type">
+        <script src="{% static 'scripts/home_scripts.js'%}"></script>
+    </head>
+    <body>
+        <section>
+            <div class="header">
+                <div><a href="http://127.0.0.1:8000/student/home"><img class="icon" src={% static 'images/icon.png' %} alt="Autolearn icon"/></a></div>
+                <div class="dropdown">
+                    <button class="dropbtn">Letters</button>
+                    <div class="dropdown-content">
+                        <a href="http://127.0.0.1:8000/student/letters/Hiragana">Hiragana</a>
+                        <a href="http://127.0.0.1:8000/student/letters/Katakana">Katakana</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Quizzes</button>
+                    <div class="dropdown-content">
+                        <a href="http://127.0.0.1:8000/student/quiz/Beginner">Beginner</a>
+                        <a href="http://127.0.0.1:8000/student/quiz/Intermediate">Intermediate</a>
+                        <a href="http://127.0.0.1:8000/student/quiz/Advanced">Advanced</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn" onclick="reference()">References</button>
+                </div>
+                <div><button class="logout" onclick = "signout()">Log out</button></div>
+            </div>
+            <div class="dashboard">
+                <div class="filter-section">
+                    <form action="" method="post" id="id_form">
+                        {% csrf_token %}
+                            <input name='target' type='text' style="width:800px; height:30px;" value={{target}}>
+                            <input id="search" type="submit" class="button" name="search" value="Search">
+                            <div id="filter" style="display:none; margin-top:10px;" >
+                                <label for="skill" class="label" style="margin-right:60px;">Skill</label>
+                                <label for="level" class="label" style="margin-right:60px;">Level</label>
+                                <label for="language" class="label">Language</label>
+                                <div class="drop-field">
+                                    {{ form.skill }}
+                                    {{ form.level }}
+                                    {{ form.language }}
+                                </div>
+                            </div>
+                    </form>
+                    <br>
+                    <button id="advanced" onclick="advancedSearch()">Advanced Search</button>
+                </div>
+                <div class="content">
+                    {% for book in page %}
+                    <div class="book">
+                        <img src="{{ book.image.url }}" alt="{{book.title}}" class="cover">
+                        <h1>{{book.title}}</h1>
+                        <p class="level">{{book.level}}</p>
+                        <p class="description">{{book.description}}</p>
+                        <p><button onclick="material({{book.id}})">Detail</button></p>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if page.has_previous %}
+                        <button><a href="?page=1"><i class="fas fa-backward"></i></a></button>
+                        <button><a href="?page={{ page.previous_page_number }}"><i class="fas fa-caret-left"></i></a></button>
+                        {% endif %}
+                
+                        <span class="current">
+                          Page {{ page.number }} of {{ page.paginator.num_pages }}.
+                        </span>
+                
+                        {% if page.has_next %}
+                        <button><a href="?page={{ page.next_page_number }}"><i class="fas fa-caret-right"></i></a></button>
+                        <button><a href="?page={{ page.paginator.num_pages }}"><i class="fas fa-forward"></i></a></button>
+                        {% endif %}
+                    </span>
+                  </div>
+            </div>
+        </section>
+        <script>
+            function advancedSearch() {
+                var btn = document.getElementById("advanced");
+                var x = document.getElementById("filter");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                    btn.textContent = "Hide"
+                } else {
+                    x.style.display = "none";
+                    btn.textContent = "Advanced Search"
+                }
+            }
+        </script>
+    </body>
+</html>
